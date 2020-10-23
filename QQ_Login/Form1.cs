@@ -1,10 +1,13 @@
-﻿using System;
+﻿
+using mshtml;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace QQ_Login
@@ -28,11 +31,17 @@ namespace QQ_Login
             Random rand = new Random();
             double r = rand.NextDouble();
             string codeimageurl = string.Format(@"https://ssl.ptlogin2.qq.com/ptqrshow?appid=1006102&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t={0}&amp;daid=1&amp;pt_3rd_aid=0", r);
+            //var request = WebRequest.Create(codeimageurl);
+            //using (var response = request.GetResponse())
+            //using (var stream = response.GetResponseStream())
+            //{
+            //    pictureBox1.Image = Bitmap.FromStream(stream);
+            //}
 
             WebBrowser browser =new WebBrowser();
             InternetSetOption(IntPtr.Zero, INTERNET_OPTION_END_BROWSER_SESSION, IntPtr.Zero, 0);
             browser.ScriptErrorsSuppressed = false;
-            browser.Navigate(new Uri(codeimageurl));//"https://id.qq.com/login/ptlogin.html"
+            browser.Navigate(new Uri("https://id.qq.com/login/ptlogin.html"));
             browser.DocumentCompleted += OnDomContentLoaded;
 
         }
@@ -119,21 +128,43 @@ namespace QQ_Login
             var browser = (WebBrowser)sender;
             if (browser != null && browser.Document != null && browser.Document.Body != null)
             {
-
-                System.Windows.Forms.HtmlDocument htmlDocument = browser.Document;
-                HtmlElementCollection htmlElementCollection = htmlDocument.Images;
-                foreach (HtmlElement htmlElement in htmlElementCollection)
+                IHTMLDocument2 ihtmldocument = (IHTMLDocument2)browser.Document.DomDocument;
+                HtmlElementCollection elementsByTagName = browser.Document.GetElementsByTagName("IFRAME");
+                if (elementsByTagName.Count > 0)
                 {
-                    string imgUrl = htmlElement.GetAttribute("src");
-                    if (imgUrl.StartsWith("https://ssl.ptlogin2.qq.com/ptqrshow?appid=1006102&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t="))
+                    foreach (HtmlElement htmlElement in elementsByTagName)
                     {
-                        this.pictureBox1.ImageLocation = imgUrl;
+                        if (htmlElement.OuterHtml.Contains("xui.ptlogin2.qq.com/cgi-bin/xlogin?"))
+                        {
+                            var source = "https:" + Regex.Match(htmlElement.OuterHtml, "<iframe.+?src=[\"'](.+?)[\"'].*?>", RegexOptions.IgnoreCase).Groups[1].Value;
+                            string _embeddedpage = @"<html> <body><iframe class='login_frame' type='text/html' width='" + webBrowser1.Width.ToString() + "' height='305'src='"+ source + "' frameborder='0'></iframe></body><html>";
+                            webBrowser1.DocumentText = _embeddedpage;
+                            webBrowser1.ScriptErrorsSuppressed = true;
+                            webBrowser1.DocumentCompleted += webBrowser1Loaded;
+                        }
+                       
                     }
-
                 }
+         
             }
         }
 
-
+        public void webBrowser1Loaded(object sender, EventArgs e)
+        {
+            var browser = (WebBrowser)sender;
+            if (browser != null && browser.Document != null && browser.Document.Body != null)
+            {
+                string cookieStr = browser.Document.Cookie;
+                if (string.IsNullOrEmpty(cookieStr)==false)
+                {
+                    string[] cookstr = cookieStr.Split(';');
+                    foreach (string str in cookstr)
+                    {
+                        //get the specific cookie
+                    }
+                }
+              
+            }
+        }
     }
 }
