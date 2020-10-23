@@ -32,15 +32,22 @@ namespace QQ_Login
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Random rand = new Random();
-            double r = rand.NextDouble();
-            string codeimageurl = string.Format(@"https://ssl.ptlogin2.qq.com/ptqrshow?appid=1006102&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t={0}&amp;daid=1&amp;pt_3rd_aid=0", r);
-            var request = WebRequest.Create(codeimageurl);
-            using (var response = request.GetResponse())
-            using (var stream = response.GetResponseStream())
-            {
-                pictureBox1.Image = Bitmap.FromStream(stream);
-            }
+            //Random rand = new Random();
+            //double r = rand.NextDouble();
+            //string codeimageurl = string.Format(@"https://ssl.ptlogin2.qq.com/ptqrshow?appid=1006102&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t={0}&amp;daid=1&amp;pt_3rd_aid=0", r);
+            //var request = WebRequest.Create(codeimageurl);
+            //using (var response = request.GetResponse())
+            //using (var stream = response.GetResponseStream())
+            //{
+            //    pictureBox1.Image = Bitmap.FromStream(stream);
+            //}
+
+            WebBrowser browser =new WebBrowser();
+            InternetSetOption(IntPtr.Zero, INTERNET_OPTION_END_BROWSER_SESSION, IntPtr.Zero, 0);
+            browser.ScriptErrorsSuppressed = false;
+            browser.Navigate(new Uri("https://id.qq.com/login/ptlogin.html"));
+            browser.DocumentCompleted += OnDomContentLoaded;
+
         }
 
         public static bool IsLogin(string qqnum, string code, string passwords, CookieContainer mycookiecontainer)
@@ -120,6 +127,30 @@ namespace QQ_Login
             }
         }
 
+        public void OnDomContentLoaded(object sender, EventArgs e)
+        {
+            var browser = (WebBrowser)sender;
+            if (browser != null && browser.Document != null && browser.Document.Body != null)
+            {
+   
+                //HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                //doc.LoadHtml(browser.DocumentText);
+                //var node = doc.DocumentNode.SelectSingleNode("//span[@id='qlogin_list']");
 
+                System.Windows.Forms.HtmlDocument htmlDocument = browser.Document;
+
+                HtmlElementCollection htmlElementCollection = htmlDocument.Images;
+                foreach (HtmlElement htmlElement in htmlElementCollection)
+                {
+                    string imgUrl = htmlElement.GetAttribute("src");
+                    if (imgUrl.StartsWith("https://ssl.ptlogin2.qq.com/ptqrshow?appid=1006102&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t="))
+                    {
+                        this.pictureBox1.ImageLocation = imgUrl;
+                    }
+
+                }
+            }
+        }
+     
     }
 }
