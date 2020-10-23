@@ -47,7 +47,7 @@
             this.tabControl1.Location = new System.Drawing.Point(5, 7);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(416, 359);
+            this.tabControl1.Size = new System.Drawing.Size(416, 406);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -58,14 +58,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(408, 290);
+            this.tabPage1.Size = new System.Drawing.Size(408, 380);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "账号登录";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(151, 190);
+            this.button1.Location = new System.Drawing.Point(144, 241);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(98, 47);
             this.button1.TabIndex = 2;
@@ -76,7 +76,7 @@
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(64, 134);
+            this.txtPassword.Location = new System.Drawing.Point(64, 155);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(267, 26);
@@ -96,7 +96,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(408, 333);
+            this.tabPage2.Size = new System.Drawing.Size(408, 380);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "快速登录";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -107,14 +107,14 @@
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScrollBarsEnabled = false;
-            this.webBrowser1.Size = new System.Drawing.Size(400, 326);
+            this.webBrowser1.Size = new System.Drawing.Size(400, 374);
             this.webBrowser1.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 368);
+            this.ClientSize = new System.Drawing.Size(423, 418);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
