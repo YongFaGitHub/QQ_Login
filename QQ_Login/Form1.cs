@@ -149,8 +149,8 @@ namespace QQ_Login
 
         public void mbrowserOnLoaded(object sender, EventArgs e)
         {
-            //webBrowser2.Navigate(new Uri("https://im.qq.com/mobileqq/"));
-            webBrowser2.Navigate(new Uri("about:blank"));
+            webBrowser2.Navigate(new Uri("https://im.qq.com/mobileqq/"));
+            //webBrowser2.Navigate(new Uri("about:blank"));
             var browser = (WebBrowser)sender;
             if (browser != null && browser.Document != null && browser.Document.Body != null)
             {
