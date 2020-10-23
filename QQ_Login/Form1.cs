@@ -160,7 +160,7 @@ namespace QQ_Login
                     string[] cookstr = cookieStr.Split(';');
                     foreach (string str in cookstr)
                     {
-                        //get the specific cookie
+                        Debug.WriteLine(str);
                     }
                 }
               
