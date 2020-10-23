@@ -29,8 +29,9 @@ namespace QQ_Login
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            InternetSetOption(IntPtr.Zero, INTERNET_OPTION_END_BROWSER_SESSION, IntPtr.Zero, 0);
+
             //WebBrowser browser =new WebBrowser();
-            //InternetSetOption(IntPtr.Zero, INTERNET_OPTION_END_BROWSER_SESSION, IntPtr.Zero, 0);
             //browser.ScriptErrorsSuppressed = false;
             //browser.Navigate(new Uri("https://id.qq.com/login/ptlogin.html"));
             //browser.DocumentCompleted += browserOnLoaded;
@@ -148,23 +149,12 @@ namespace QQ_Login
 
         public void mbrowserOnLoaded(object sender, EventArgs e)
         {
+            //webBrowser2.Navigate(new Uri("https://im.qq.com/mobileqq/"));
             webBrowser2.Navigate(new Uri("about:blank"));
             var browser = (WebBrowser)sender;
             if (browser != null && browser.Document != null && browser.Document.Body != null)
             {
-                if (browser.Document.Body.InnerHtml.IndexOf("web_login", StringComparison.OrdinalIgnoreCase) + 1 > 0)
-                {
-                    var bt = browser.Document.GetElementById("web_login");
-                }
-                else if (browser.Document.Body.InnerHtml.IndexOf("switcher_plogin", StringComparison.OrdinalIgnoreCase) + 1 > 0)
-                {
-                    browser.Document.GetElementById("login").InvokeMember("click");
-                }
-                else if (browser.Document.Body.InnerHtml.IndexOf("快速安全登录", StringComparison.OrdinalIgnoreCase) + 1 > 0)
-                {
-                    browser.Document.GetElementById("login").InvokeMember("click");
-                }
-                else if (browser.Document.Body.InnerHtml.IndexOf("login_frame", StringComparison.OrdinalIgnoreCase) + 1 > 0)
+                if (browser.Document.Body.InnerHtml.IndexOf("login_frame", StringComparison.OrdinalIgnoreCase) + 1 > 0)
                 {
                     IHTMLDocument2 ihtmldocument = (IHTMLDocument2)browser.Document.DomDocument;
                     HtmlElementCollection elementsByTagName = browser.Document.GetElementsByTagName("iframe");
@@ -178,8 +168,7 @@ namespace QQ_Login
                                 string _embeddedpage = @"<html> <body><iframe class='login_frame' type='text/html' width='" + (webBrowser2.Width - 20).ToString() + "' height='" + (webBrowser2.Height - 20).ToString() + "' src='" + source + "'></iframe></body><html>";
                                 webBrowser2.DocumentText = _embeddedpage;
                                 webBrowser2.ScriptErrorsSuppressed = true;
-                                webBrowser2.DocumentCompleted += webBrowser1Loaded;
-
+                                webBrowser2.DocumentCompleted += webBrowser2Loaded;
                                 break;
                             }
 
@@ -195,7 +184,7 @@ namespace QQ_Login
 
             }
         }
-        public void webBrowser1Loaded(object sender, EventArgs e)
+        public void webBrowser2Loaded(object sender, EventArgs e)
         {
             var browser = (WebBrowser)sender;
             if (browser != null && browser.Document != null && browser.Document.Body != null)
@@ -206,11 +195,32 @@ namespace QQ_Login
                     string[] cookstr = cookieStr.Split(';');
                     foreach (string cookie in cookstr)
                     {
-                        Debug.WriteLine(cookie);
+                        Console.WriteLine(cookie);
+                        if (cookie.Trim().IndexOf("skey") == 0)
+                        {
+                            string[] cookieNameValue = cookie.Split('=');
+                            if (!string.IsNullOrEmpty(cookieNameValue[1]))
+                            {
+                                int t = 5381;
+                                for (int r = 0, n = cookieNameValue[1].Length; r < n; ++r)
+                                {
+                                    t += (t << 5) + (CharAt(cookieNameValue[1], r).ToCharArray()[0] & 0xff);
+                                }
+                                string bkn = (2147483647 & t).ToString();
+                                MessageBox.Show("登录成功!" + Environment.NewLine + cookie + Environment.NewLine + " bkn=" +bkn );
+                                break;
+                            }
+                        }
                     }
                 }
               
             }
+        }
+        private string CharAt(string s, int index)
+        {
+            if ((index >= s.Length) || (index < 0))
+                return "";
+            return s.Substring(index, 1);
         }
     }
 }
