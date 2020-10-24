@@ -36,6 +36,9 @@ namespace QQ_Login
             //browser.Navigate(new Uri("https://id.qq.com/login/ptlogin.html"));
             //browser.DocumentCompleted += browserOnLoaded;
 
+           
+            webBrowser2.Navigate(new Uri("https://xui.ptlogin2.qq.com/cgi-bin/xlogin?appid=501038301&target=self&s_url=https://im.qq.com/loginSuccess.html"));
+            //不知道上面这个地址是不是长期固定,保险起见从主页入手
             WebBrowser mbrowser = new WebBrowser();
             mbrowser.ScriptErrorsSuppressed = false;
             mbrowser.Navigate(new Uri("https://im.qq.com/mobileqq/"));
@@ -149,8 +152,7 @@ namespace QQ_Login
 
         public void mbrowserOnLoaded(object sender, EventArgs e)
         {
-            //webBrowser2.Navigate(new Uri("https://im.qq.com/mobileqq/"));
-            webBrowser2.Navigate(new Uri("about:blank"));
+            
             var browser = (WebBrowser)sender;
             if (browser != null && browser.Document != null && browser.Document.Body != null)
             {
