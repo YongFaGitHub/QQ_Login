@@ -168,9 +168,16 @@ namespace QQ_Login
                             {
                                 var source =  Regex.Match(htmlElement.OuterHtml, "<iframe.+?src=[\"'](.+?)[\"'].*?>", RegexOptions.IgnoreCase).Groups[1].Value.Replace("target=self&amp;", "target=_new&amp;");
                                 string _embeddedpage = @"<html> <body><iframe class='login_frame' type='text/html' width='" + (webBrowser2.Width - 20).ToString() + "' height='" + (webBrowser2.Height - 20).ToString() + "' src='" + source + "'></iframe></body><html>";
-                                webBrowser2.DocumentText = _embeddedpage;
-                                webBrowser2.ScriptErrorsSuppressed = true;
-                                webBrowser2.DocumentCompleted += webBrowser2Loaded;
+                                try
+                                {
+                                    webBrowser2.DocumentText = _embeddedpage;
+                                    webBrowser2.ScriptErrorsSuppressed = true;
+                                    webBrowser2.DocumentCompleted += webBrowser2Loaded;                                   
+                                }
+                                catch
+                                {
+
+                                }
                                 break;
                             }
 
@@ -223,6 +230,24 @@ namespace QQ_Login
             if ((index >= s.Length) || (index < 0))
                 return "";
             return s.Substring(index, 1);
+        }
+
+        /// <summary>
+        /// 获取两个像素点颜色的差异
+        /// </summary>
+        /// <param name="c1"></param>
+        /// <param name="c2"></param>
+        /// <returns></returns>
+        public double GetDifferentValue(Color c1, Color c2)
+        {
+            double y1 = 0.299 * c1.R + 0.587 * c1.G + 0.114 * c1.B;
+            double u1 = -0.14713 * c1.R - 0.28886 * c1.G + 0.436 * c1.B;
+            double v1 = 0.615 * c1.R - 0.51498 * c1.G - 0.10001 * c1.B;
+            double y2 = 0.299 * c2.R + 0.587 * c2.G + 0.114 * c2.B;
+            double u2 = -0.14713 * c2.R - 0.28886 * c2.G + 0.436 * c2.B;
+            double v2 = 0.615 * c2.R - 0.51498 * c2.G - 0.10001 * c2.B;
+            double d = System.Math.Sqrt((y1 - y2) * (y1 - y2) + (u1 - u2) * (u1 - u2) + (v1 - v2) * (v1 - v2));
+            return d;
         }
     }
 }
