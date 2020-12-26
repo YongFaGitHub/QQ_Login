@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{731D7E67-CD2A-4DBA-B0EA-A34D83394663}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AndroidQQLib</RootNamespace>
+    <AssemblyName>AndroidQQLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QQ580\AndroidOnly\AndroidOnly.cs" />
+    <Compile Include="QQ580\AndroidOnly\_bin.cs" />
+    <Compile Include="QQ580\AndroidOnly\_hash.cs" />
+    <Compile Include="QQ580\AndroidOnly\_pack.cs" />
+    <Compile Include="QQ580\AndroidOnly\_unpack.cs" />
+    <Compile Include="QQ580\AndroidQQ\Android.cs" />
+    <Compile Include="QQ580\AndroidQQ\JceFormat.cs" />
+    <Compile Include="QQ580\AndroidQQ\JceInputStream.cs" />
+    <Compile Include="QQ580\AndroidQQ\JceOutputStream.cs" />
+    <Compile Include="QQ580\AndroidQQ\JceStruct_Display.cs" />
+    <Compile Include="QQ580\AndroidQQ\JceStruct_Factory.cs" />
+    <Compile Include="QQ580\AndroidQQ\Staticdata.cs" />
+    <Compile Include="QQ580\AndroidQQ\Tlv_.cs" />
+    <Compile Include="QQ580\datatype\CardData.cs" />
+    <Compile Include="QQ580\datatype\dk1.cs" />
+    <Compile Include="QQ580\datatype\FILETIME.cs" />
+    <Compile Include="QQ580\datatype\HeadData.cs" />
+    <Compile Include="QQ580\datatype\JceMap.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_FL.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_FriendInfo.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_FriendListResp.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_FSOLREQ.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_GPS.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_GpsInfo.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_GroupInfo.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_GroupListResp.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_Group_MemberList.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_ReqHeader.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_RequestPacket.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_ReqUserInfo.cs" />
+    <Compile Include="QQ580\datatype\JceStruct_SvcReqRegister.cs" />
+    <Compile Include="QQ580\datatype\qq_global.cs" />
+    <Compile Include="QQ580\datatype\qq_info.cs" />
+    <Compile Include="QQ580\datatype\RespEncounterInfo.cs" />
+    <Compile Include="QQ580\datatype\struct_group_msg.cs" />
+    <Compile Include="QQ580\datatype\struct_msg.cs" />
+    <Compile Include="QQ580\datatype\struct_msg_type.cs" />
+    <Compile Include="QQ580\datatype\SYSTEMTIME.cs" />
+    <Compile Include="QQ580\QQCrypter.cs" />
+    <Compile Include="QQ580\QTea.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

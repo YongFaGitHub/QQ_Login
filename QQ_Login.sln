@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QQ_Login", "QQ_Login\QQ_Login.csproj", "{7F5F45D3-753C-447A-AA1E-7DB0B90FB327}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidQQLib", "AndroidQQLib\AndroidQQLib.csproj", "{731D7E67-CD2A-4DBA-B0EA-A34D83394663}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7F5F45D3-753C-447A-AA1E-7DB0B90FB327}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F5F45D3-753C-447A-AA1E-7DB0B90FB327}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F5F45D3-753C-447A-AA1E-7DB0B90FB327}.Release|Any CPU.Build.0 = Release|Any CPU
+		{731D7E67-CD2A-4DBA-B0EA-A34D83394663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{731D7E67-CD2A-4DBA-B0EA-A34D83394663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{731D7E67-CD2A-4DBA-B0EA-A34D83394663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{731D7E67-CD2A-4DBA-B0EA-A34D83394663}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

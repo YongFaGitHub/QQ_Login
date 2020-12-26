@@ -29,6 +29,12 @@ namespace QQ_Login
             frm.Show();
         }
 
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AndroidQQ frm = new AndroidQQ();
+            frm.Show();
+        }
         private void Main_Load(object sender, EventArgs e)
         {
 

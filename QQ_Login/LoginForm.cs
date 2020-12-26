@@ -77,17 +77,17 @@ namespace QQ_Login
 				DriverService.HideCommandPromptWindow = true;
 				DriverService.SuppressInitialDiagnosticInformation = true;
 				var options = new ChromeOptions();
-                options.AddUserProfilePreference("disable-popup-blocking", "true");
-                options.AddAdditionalCapability("useAutomationExtension", false);
-                options.AddUserProfilePreference("credentials_enable_service", false);
-                options.AddUserProfilePreference("profile.password_manager_enabled", false);
-                options.AddArguments("--headless");
-                options.AddArgument("log-level=3");
-                options.AddArgument("--disable-notifications");
-                options.AddArgument("--disable-popup-blocking");
-                options.AddExcludedArguments(new List<string>() { "enable-automation" });
-                options.AddArgument("--disable-blink-features");
-                options.AddArgument("--disable-blink-features=AutomationControlled");
+                //options.AddUserProfilePreference("disable-popup-blocking", "true");
+                //options.AddAdditionalCapability("useAutomationExtension", false);
+                //options.AddUserProfilePreference("credentials_enable_service", false);
+                //options.AddUserProfilePreference("profile.password_manager_enabled", false);
+                //options.AddArguments("--headless");
+                //options.AddArgument("log-level=3");
+                //options.AddArgument("--disable-notifications");
+                //options.AddArgument("--disable-popup-blocking");
+                //options.AddExcludedArguments(new List<string>() { "enable-automation" });
+                //options.AddArgument("--disable-blink-features");
+                //options.AddArgument("--disable-blink-features=AutomationControlled");
                 try
 				{
 					using (IWebDriver driver = new ChromeDriver(DriverService, options))
@@ -190,7 +190,7 @@ namespace QQ_Login
 				catch (Exception ex)
 				{
 					Console.WriteLine(ex.Message.ToString());
-					DriverService.Dispose();
+					//DriverService.Dispose();
 					return false;
 				}
 				
