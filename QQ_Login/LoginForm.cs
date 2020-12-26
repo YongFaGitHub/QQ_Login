@@ -167,6 +167,20 @@ namespace QQ_Login
 							cookie.Name = cook.Name;
 							cookie.Value = cook.Value;
 							cookie.Domain = cook.Domain;
+							if (cook.Name.Contains("skey"))
+							{
+								if (!string.IsNullOrEmpty(cookie.Value))
+								{
+									int t = 5381;
+									for (int r = 0, n = cookie.Value.Length; r < n; ++r)
+									{
+										t += (t << 5) + (CharAt(cookie.Value, r).ToCharArray()[0] & 0xff);
+									}
+									string bkn = (2147483647 & t).ToString();
+									MessageBox.Show("登录成功!" + Environment.NewLine + cookie + Environment.NewLine + " bkn=" + bkn);
+									break;
+								}
+							}
 							cc.Add(cookie);
 						}
 						mycookiecontainer.Add(cc);
@@ -188,6 +202,13 @@ namespace QQ_Login
 			}
 
 			return false;
+		}
+
+		private string CharAt(string s, int index)
+		{
+			if ((index >= s.Length) || (index < 0))
+				return "";
+			return s.Substring(index, 1);
 		}
 
 		/// <summary>
