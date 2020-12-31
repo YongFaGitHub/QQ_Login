@@ -37,8 +37,14 @@ namespace AndroidQQLib.QQ580.AndroidOnly
             _bin Xbin = new _bin();
             return Xbin.Bin2Byte(t); 
         }
+        public byte[] textbyte;
+        public byte[] test1;
+        public byte[] test2;
         public int GetInt()
         {
+            textbyte = GetAll();
+           test1 = textbyte.Take(4).ToArray();
+            test2= textbyte.Skip(4).ToArray();
             byte[] t = m_bin.Take(4).ToArray();
             m_bin = m_bin.Skip(4).ToList();
             _bin Xbin = new _bin();

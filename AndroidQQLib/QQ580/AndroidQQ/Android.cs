@@ -318,6 +318,8 @@ namespace AndroidQQLib.QQ580.AndroidQQ
             qq.tim = new byte[] { 86, 247, 21, 166 };
             //self.qq.tim = [86, 247, 21, 166]  //写死time，方便测试
             //qq.randKey = Xbin.GetRandomBin(16);
+
+            //tlv.tlv114_get0058(new byte[] { 11, 22, 33,44,55,66,77,88,99 });
             qq.randKey = new byte[16] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             //self.qq.randKey = [0 for i in range(16)] //写死randKey，方便测试
 
@@ -515,12 +517,12 @@ namespace AndroidQQLib.QQ580.AndroidQQ
             return b; 
         }
 
-        public byte[] Un_pack(byte[] b,int bl=0)
+        public byte[] Un_pack(byte[] b,int index = 0)
         {
             int pos1 = 0;
             pos1 = AndroidOnly.AndroidOnly.findlist(b, qq.caption);
             b = b.Skip((b.Length - (b.Length - pos1 - qq.caption.Length + 1))).ToArray();
-            if (bl == 1)
+            if (index == 1)
             {
                 pos1 = AndroidOnly.AndroidOnly.findlist(b, qq.caption);
                 b = b.Skip((b.Length - (b.Length - pos1 - qq.caption.Length + 1))).ToArray();
@@ -551,11 +553,12 @@ namespace AndroidQQLib.QQ580.AndroidQQ
             b = Hash.UNQQTEA(b,qq.key);
             l = b.Length;
             unPack.SetData(b);
-
+            Console.WriteLine(b.Length);
             //上面包内容
             head_len = unPack.GetInt();
             b = unPack.GetBin(head_len - 4);
             body_bin = unPack.GetAll();
+            Console.WriteLine(b.Length);
 
             unPack.SetData(b);
             sso_seq = unPack.GetInt();
